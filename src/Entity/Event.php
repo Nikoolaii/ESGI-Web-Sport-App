@@ -77,6 +77,17 @@ class Event
         return $this->participants;
     }
 
+    public function getParticipantByEmail(string $email): ?Participant
+    {
+        foreach ($this->participants as $participant) {
+            if ($participant->getEmail() === $email) {
+                return $participant;
+            }
+        }
+
+        return null;
+    }
+
     public function addParticipant(Participant $participant): static
     {
         if (!$this->participants->contains($participant)) {
