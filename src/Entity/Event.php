@@ -26,12 +26,14 @@ class Event
     #[Assert\NotBlank]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $location = null;
-
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Participant::class, orphanRemoval: true)]
     private Collection $participants;
+
+    #[ORM\Column(length: 255)]
+    private ?string $latitude = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $longitude = null;
 
     public function __construct()
     {
@@ -67,18 +69,6 @@ class Event
         return $this;
     }
 
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location): static
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Participant>
      */
@@ -104,6 +94,30 @@ class Event
                 $participant->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLatitude(): ?string
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(string $latitude): static
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?string
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(string $longitude): static
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

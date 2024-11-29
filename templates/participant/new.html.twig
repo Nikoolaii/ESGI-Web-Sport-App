@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add participant{% endblock %}
+
+{% block body %}
+    <h1>Add participant</h1>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div>
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div>
+            {{ form_label(form.latitude) }}
+            {{ form_widget(form.latitude) }}
+            {{ form_errors(form.latitude) }}
+        </div>
+        <div>
+            {{ form_label(form.longitude) }}
+            {{ form_widget(form.longitude) }}
+            {{ form_errors(form.longitude) }}
+        </div>
+        <div>
+            {{ form_widget(form.Validate) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

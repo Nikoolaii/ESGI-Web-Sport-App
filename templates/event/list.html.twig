@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+    <h1>Events</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.latitude }}</td>
+                    <td>{{ event.longitude }}</td>
+                    <td>{{ event.date|date('Y-m-d') }}</td>
+                    <td>
+                        <a href="{{ path('app_event_show', {id: event.id}) }}">Show</a>
+                        <a href="{{ path('app_add_participant', {id: event.id}) }}">Add Participant</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no participant</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

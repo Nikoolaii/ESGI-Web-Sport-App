@@ -16,7 +16,8 @@ class AppFixtures extends Fixture
             $event = new Event();
             $event->setName(Factory::create()->sentence(6));
             $event->setDate(Factory::create()->dateTimeThisYear());
-            $event->setLocation(Factory::create()->city());
+            $event->setLatitude(Factory::create()->latitude());
+            $event->setLongitude(Factory::create()->longitude());
             $manager->persist($event);
         }
 

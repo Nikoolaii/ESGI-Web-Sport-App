@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Repository\EventRepository;
+use App\Service\DistanceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,7 +16,7 @@ class EventController extends AbstractController
     {
         $events = $eventRepository->findAll();
 
-        return $this->render('event/index.html.twig', [
+        return $this->render('event/list.html.twig', [
             'events' => $events,
         ]);
     }
@@ -23,8 +24,23 @@ class EventController extends AbstractController
     #[Route('/events/{id}', name: 'app_event_show')]
     public function viewEvent(Event $event): Response
     {
-        return $this->render('event/show.html.twig', [
+        return $this->render('event/view.html.twig', [
             'event' => $event,
+        ]);
+    }
+
+    #[Route('/events/{id}/distance?{long}&{lat}', name: 'app_event_distance')]
+    public function calculateDistance(Event $event, float $long, float $lat): Response
+    {
+        $eventLong = $event->getLongitude();
+        $eventLat = $event->getLatitude();
+
+        $distanceCalculator = new DistanceCalculator();
+        $distance = $distanceCalculator->calculateDistance($eventLat, $eventLong, $lat, $long);
+
+        return $this->render('event/distance.html.twig', [
+            'event' => $event,
+            'distance' => $distance,
         ]);
     }
 }

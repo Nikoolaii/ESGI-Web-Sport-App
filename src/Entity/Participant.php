@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
 class Participant
@@ -28,7 +29,7 @@ class Participant
     private ?string $latitude = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Longitute = null;
+    private ?string $longitude = null;
 
     public function getId(): ?int
     {
@@ -83,14 +84,14 @@ class Participant
         return $this;
     }
 
-    public function getLongitute(): ?string
+    public function getLongitude(): ?string
     {
-        return $this->Longitute;
+        return $this->longitude;
     }
 
-    public function setLongitute(string $Longitute): static
+    public function setLongitude(string $longidute): static
     {
-        $this->Longitute = $Longitute;
+        $this->longitude = $longidute;
 
         return $this;
     }
